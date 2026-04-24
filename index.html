@@ -1,0 +1,2620 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>TOUR DE CONTRÔLE | Pâtisserie d'Excellence & Formation</title>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --saumon: #ff9b8a;
+            --saumon-light: #ffd1c7;
+            --saumon-dark: #e88372;
+            --cream: #fdfbf7;
+            --chocolate: #3e2723;
+            --white: #ffffff;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+            --green-500: #22c55e;
+            --green-600: #16a34a;
+            --green-100: #d1fae5;
+            --red-500: #ef4444;
+            --red-600: #dc2626;
+            --red-100: #fee2e2;
+            --yellow-500: #eab308;
+            --yellow-100: #fef3c7;
+            --blue-500: #3b82f6;
+            --blue-100: #dbeafe;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--gray-800);
+            background-color: var(--white);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            color: var(--chocolate);
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fadeUp {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .animate-fadeLeft {
+            animation: fadeInLeft 0.6s ease-out forwards;
+        }
+
+        .animate-fadeRight {
+            animation: fadeInRight 0.6s ease-out forwards;
+        }
+
+        .animate-scale {
+            animation: scaleIn 0.5s ease-out forwards;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-100);
+            padding: 0.5rem 0;
+            font-size: 0.85rem;
+        }
+
+        .top-bar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--chocolate);
+        }
+
+        .brand-name span {
+            color: var(--saumon);
+        }
+
+        .top-bar-tagline {
+            color: var(--gray-500);
+            font-style: italic;
+        }
+
+        /* Header */
+        .header {
+            background: var(--white);
+            padding: 0.75rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.3s;
+        }
+
+        .header.scrolled {
+            box-shadow: var(--shadow-md);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+
+        .logo-image {
+            height: 48px;
+            width: auto;
+            border-radius: 10px;
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: var(--chocolate);
+            margin-left: 0.5rem;
+        }
+
+        .logo-text span {
+            color: var(--saumon);
+        }
+
+        .nav-desktop {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            margin: 0 auto;
+        }
+
+        .nav-link {
+            color: var(--gray-700);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--saumon);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--saumon);
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .lang-selector {
+            display: flex;
+            gap: 0.35rem;
+        }
+
+        .lang-btn {
+            padding: 0.3rem 0.6rem;
+            border: 1px solid var(--gray-300);
+            background: transparent;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.75rem;
+            transition: all 0.3s;
+        }
+
+        .lang-btn:hover,
+        .lang-btn.active {
+            background: var(--saumon);
+            color: var(--white);
+            border-color: var(--saumon);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            font-size: 1.3rem;
+            color: var(--chocolate);
+        }
+
+        .mobile-menu {
+            display: none;
+            background: var(--white);
+            border-top: 1px solid var(--gray-200);
+            padding: 1rem 0;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .mobile-menu.active {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        .mobile-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .mobile-nav-link {
+            padding: 0.75rem 1.5rem;
+            color: var(--gray-700);
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+
+        .mobile-nav-link:hover,
+        .mobile-nav-link.active {
+            background: var(--saumon-light);
+            color: var(--saumon-dark);
+        }
+
+        .mobile-lang-selector {
+            display: flex;
+            gap: 0.5rem;
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--gray-200);
+            margin-top: 0.5rem;
+        }
+
+        .mobile-lang-btn {
+            flex: 1;
+            padding: 0.5rem;
+            border: 1px solid var(--gray-300);
+            background: transparent;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .mobile-lang-btn:hover,
+        .mobile-lang-btn.active {
+            background: var(--saumon);
+            color: var(--white);
+            border-color: var(--saumon);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.8rem 1.8rem;
+            border-radius: 60px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            font-size: 0.9rem;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--saumon);
+            color: var(--white);
+            box-shadow: 0 8px 18px rgba(255, 155, 138, 0.25);
+        }
+
+        .btn-primary:hover {
+            background: var(--saumon-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--chocolate);
+            border: 2px solid var(--saumon);
+        }
+
+        .btn-secondary:hover {
+            background: var(--saumon);
+            color: var(--white);
+        }
+
+        .btn-whatsapp {
+            background: var(--green-500);
+            color: white;
+        }
+
+        .btn-whatsapp:hover {
+            transform: translateY(-2px);
+            background: var(--green-600);
+        }
+
+        .btn-danger {
+            background: var(--red-500);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: var(--red-600);
+        }
+
+        .btn-sm {
+            padding: 0.4rem 1rem;
+            font-size: 0.8rem;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--saumon-light) 0%, var(--cream) 100%);
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-subtitle {
+            font-size: 1.1rem;
+            color: var(--gray-600);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: calc(100vh - 180px);
+            display: flex;
+            align-items: center;
+            padding: 3rem 0 5rem;
+            background: linear-gradient(135deg, #fff5f3 0%, var(--white) 100%);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-title {
+            font-size: 3.8rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title-line1 {
+            display: block;
+            font-size: 1.1rem;
+            font-weight: 500;
+            letter-spacing: 4px;
+            margin-bottom: 0.5rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .hero-title-line2 {
+            display: block;
+            font-size: 3.2rem;
+        }
+
+        .hero-title-line2 span {
+            color: var(--saumon);
+        }
+
+        .hero-description {
+            font-size: 1rem;
+            color: var(--gray-600);
+            max-width: 550px;
+            margin-bottom: 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 32px;
+            box-shadow: var(--shadow-xl);
+            transition: transform 0.5s;
+        }
+
+        .hero-image img:hover {
+            transform: scale(1.02);
+        }
+
+        /* Products */
+        .products-section {
+            padding: 5rem 0;
+            background: var(--white);
+        }
+
+        .category-filter {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 3rem;
+        }
+
+        .category-btn {
+            padding: 0.5rem 1.5rem;
+            background: var(--white);
+            border: 1px solid var(--gray-300);
+            border-radius: 60px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: var(--saumon);
+            color: white;
+            border-color: var(--saumon);
+            transform: translateY(-2px);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .product-image {
+            position: relative;
+            overflow: hidden;
+            height: 240px;
+            cursor: pointer;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.08);
+        }
+
+        .product-category {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(4px);
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .product-content {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            color: var(--saumon-dark);
+            font-weight: bold;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .product-actions .btn {
+            flex: 1;
+            padding: 0.5rem;
+            font-size: 0.85rem;
+        }
+
+        /* Training */
+        .training-section {
+            padding: 5rem 0;
+            background: var(--gray-50);
+        }
+
+        .training-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+        }
+
+        .training-card {
+            background: white;
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            transition: transform 0.3s;
+        }
+
+        .training-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .training-image {
+            height: 280px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .training-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .training-card:hover .training-image img {
+            transform: scale(1.05);
+        }
+
+        .training-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--saumon);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .training-content {
+            padding: 2rem;
+        }
+
+        .training-title {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+        }
+
+        .training-details {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .training-details li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.8rem;
+            color: var(--gray-600);
+        }
+
+        .training-details i {
+            color: var(--saumon);
+            width: 22px;
+        }
+
+        .training-price {
+            font-size: 2rem;
+            color: var(--saumon-dark);
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Delivery */
+        .delivery-section {
+            padding: 5rem 0;
+            background: var(--white);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 32px;
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            transition: all 0.3s;
+            opacity: 0;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .service-card:nth-child(1) { animation: fadeInLeft 0.6s ease-out forwards; }
+        .service-card:nth-child(2) { animation: fadeInUp 0.6s ease-out 0.2s forwards; }
+        .service-card:nth-child(3) { animation: fadeInRight 0.6s ease-out 0.4s forwards; }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--saumon-light), #ffe8e3);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .service-icon i {
+            font-size: 2.5rem;
+            color: var(--saumon-dark);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover .service-icon i {
+            transform: scale(1.2);
+        }
+
+        .service-title {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .service-price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--saumon-dark);
+            margin: 1rem 0;
+        }
+
+        .delivery-zones {
+            background: linear-gradient(135deg, var(--cream) 0%, var(--white) 100%);
+            border-radius: 40px;
+            padding: 3rem;
+            margin-bottom: 4rem;
+            border: 1px solid var(--saumon-light);
+            animation: fadeInUp 0.6s ease-out 0.6s forwards;
+            opacity: 0;
+        }
+
+        .zones-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .zones-header i {
+            font-size: 2rem;
+            color: var(--saumon);
+            background: white;
+            padding: 0.8rem;
+            border-radius: 20px;
+            transition: transform 0.3s;
+        }
+
+        .zones-header i:hover {
+            transform: rotate(360deg) scale(1.1);
+        }
+
+        .zones-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .zone-item {
+            background: white;
+            padding: 0.8rem 1rem;
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s;
+        }
+
+        .zone-item:hover {
+            transform: translateX(5px);
+            background: var(--saumon-light);
+            box-shadow: var(--shadow-md);
+        }
+
+        .zone-item i {
+            color: var(--saumon);
+            transition: transform 0.3s;
+        }
+
+        .zone-item:hover i {
+            transform: scale(1.2);
+        }
+
+        .delivery-cta {
+            background: linear-gradient(135deg, var(--chocolate) 0%, #2a1a15 100%);
+            border-radius: 40px;
+            padding: 3rem;
+            text-align: center;
+            color: white;
+            animation: pulse 2s infinite;
+        }
+
+        .delivery-cta:hover {
+            animation: none;
+            transform: scale(1.02);
+            transition: transform 0.3s;
+        }
+
+        .delivery-cta h3 {
+            color: white;
+            font-size: 2rem;
+        }
+
+        /* Blog */
+        .blog-section {
+            padding: 5rem 0;
+            background: var(--gray-50);
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .blog-card {
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s;
+            opacity: 0;
+        }
+
+        .blog-card:nth-child(1) { animation: fadeInUp 0.6s ease-out forwards; }
+        .blog-card:nth-child(2) { animation: fadeInUp 0.6s ease-out 0.15s forwards; }
+        .blog-card:nth-child(3) { animation: fadeInUp 0.6s ease-out 0.3s forwards; }
+        .blog-card:nth-child(4) { animation: fadeInUp 0.6s ease-out 0.45s forwards; }
+        .blog-card:nth-child(5) { animation: fadeInUp 0.6s ease-out 0.6s forwards; }
+        .blog-card:nth-child(6) { animation: fadeInUp 0.6s ease-out 0.75s forwards; }
+
+        .blog-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .blog-image {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .blog-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+
+        .blog-card:hover .blog-image img {
+            transform: scale(1.08);
+        }
+
+        .blog-overlay {
+            position: absolute;
+            bottom: -100%;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 1rem;
+            transition: bottom 0.3s;
+            color: white;
+            font-size: 0.8rem;
+        }
+
+        .blog-card:hover .blog-overlay {
+            bottom: 0;
+        }
+
+        .blog-content {
+            padding: 1.5rem;
+        }
+
+        .blog-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.75rem;
+            color: var(--gray-500);
+        }
+
+        .blog-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+            transition: color 0.3s;
+        }
+
+        .blog-card:hover .blog-title {
+            color: var(--saumon);
+        }
+
+        .blog-excerpt {
+            color: var(--gray-600);
+            margin-bottom: 1rem;
+        }
+
+        .blog-link {
+            color: var(--saumon);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s;
+        }
+
+        .blog-link:hover {
+            gap: 0.8rem;
+        }
+
+        /* Contact */
+        .contact-section {
+            padding: 5rem 0;
+            background: var(--white);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 32px;
+            box-shadow: var(--shadow-lg);
+            transition: transform 0.3s;
+        }
+
+        .contact-form:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-info {
+            background: var(--gray-50);
+            padding: 2rem;
+            border-radius: 32px;
+            transition: transform 0.3s;
+        }
+
+        .contact-info:hover {
+            transform: translateY(-5px);
+        }
+
+        .info-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .info-item:hover {
+            transform: translateX(5px);
+        }
+
+        .info-item i {
+            color: var(--saumon);
+            font-size: 1.3rem;
+            width: 30px;
+            transition: transform 0.3s;
+        }
+
+        .info-item:hover i {
+            transform: scale(1.2);
+        }
+
+        .map-container {
+            margin-top: 2rem;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.3s;
+        }
+
+        .map-container:hover {
+            transform: scale(1.02);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 300px;
+            border: 0;
+            display: block;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.4rem;
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--gray-300);
+            border-radius: 16px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--saumon);
+            box-shadow: 0 0 0 3px rgba(255, 155, 138, 0.2);
+            transform: scale(1.02);
+        }
+
+        /* Image Upload */
+        .image-upload-area {
+            border: 2px dashed var(--gray-300);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: var(--gray-50);
+        }
+
+        .image-upload-area:hover {
+            border-color: var(--saumon);
+            background: var(--saumon-light);
+            transform: scale(1.02);
+        }
+
+        .image-preview {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-top: 1rem;
+        }
+
+        /* Social Floating Buttons */
+        .social-float-container {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .social-float-btn {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .social-float-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .float-whatsapp {
+            background: var(--green-500);
+            color: white;
+        }
+
+        .float-tiktok {
+            background: #000000;
+            color: white;
+        }
+
+        .float-facebook {
+            background: #1877f2;
+            color: white;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--chocolate);
+            color: white;
+            padding: 4rem 0 0;
+            margin-top: 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 3rem;
+            padding-bottom: 3rem;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .footer-brand h3 span {
+            color: var(--saumon);
+        }
+
+        .footer-brand p {
+            color: var(--gray-300);
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 38px;
+            height: 38px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            background: var(--saumon);
+            transform: translateY(-3px) rotate(360deg);
+        }
+
+        .footer-links h4 {
+            color: var(--saumon);
+            margin-bottom: 1.2rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.6rem;
+        }
+
+        .footer-links a {
+            color: var(--gray-300);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--saumon);
+            padding-left: 5px;
+        }
+
+        .footer-contact i {
+            color: var(--saumon);
+            margin-right: 0.75rem;
+            width: 20px;
+        }
+
+        .footer-contact p {
+            color: var(--gray-300);
+            margin-bottom: 0.75rem;
+            font-size: 0.85rem;
+            transition: transform 0.3s;
+        }
+
+        .footer-contact p:hover {
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding: 1.5rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--gray-400);
+            font-size: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .admin-link {
+            color: var(--gray-500);
+            text-decoration: none;
+            font-size: 0.75rem;
+            transition: color 0.3s;
+        }
+
+        .admin-link:hover {
+            color: var(--saumon);
+        }
+
+        /* Admin Dashboard */
+        .admin-dashboard {
+            display: flex;
+            min-height: 100vh;
+            background: var(--gray-50);
+        }
+
+        .admin-sidebar {
+            width: 280px;
+            background: var(--chocolate);
+            color: white;
+            padding: 1.5rem 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            transition: transform 0.3s ease;
+            z-index: 1001;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .admin-sidebar.closed {
+            transform: translateX(-100%);
+        }
+
+        .admin-sidebar-header {
+            padding: 0 1.5rem 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .admin-sidebar-header h3 {
+            color: white;
+        }
+
+        .admin-sidebar-header h3 span {
+            color: var(--saumon);
+        }
+
+        .admin-user-info {
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .admin-avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--saumon);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .admin-user-name {
+            font-weight: 600;
+        }
+
+        .admin-user-role {
+            color: var(--saumon-light);
+            font-size: 0.7rem;
+        }
+
+        .admin-nav {
+            list-style: none;
+            padding: 0 0.75rem;
+            margin-top: 1rem;
+            flex: 1;
+        }
+
+        .admin-nav-item {
+            padding: 0.7rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.3s;
+            color: var(--gray-300);
+        }
+
+        .admin-nav-item:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .admin-nav-item.active {
+            background: var(--saumon);
+            color: white;
+        }
+
+        .admin-nav-logout {
+            padding: 0 0.75rem 1rem;
+            margin-top: auto;
+        }
+
+        .logout-btn {
+            background: var(--red-500);
+            color: white !important;
+        }
+
+        .logout-btn:hover {
+            background: var(--red-600) !important;
+        }
+
+        .admin-main {
+            flex: 1;
+            margin-left: 280px;
+            padding: 1.5rem;
+            min-height: 100vh;
+            transition: margin-left 0.3s ease;
+        }
+
+        .admin-main.full-width {
+            margin-left: 0;
+        }
+
+        .admin-sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+
+        .admin-mobile-toggle {
+            display: none;
+            position: fixed;
+            bottom: 1.5rem;
+            left: 1.5rem;
+            z-index: 1002;
+            background: var(--saumon);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Admin Content Styles */
+        .admin-section {
+            background: white;
+            border-radius: 24px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .admin-section:hover {
+            transform: translateY(-2px);
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .admin-header h2 {
+            font-size: 1.5rem;
+        }
+
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.2rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--chocolate);
+        }
+
+        .stat-label {
+            color: var(--gray-600);
+            font-size: 0.85rem;
+        }
+
+        .charts-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .chart-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .chart-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .admin-table-container {
+            background: white;
+            border-radius: 20px;
+            padding: 1.2rem;
+            overflow-x: auto;
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .admin-table th,
+        .admin-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .admin-table th {
+            background: var(--gray-50);
+            font-weight: 600;
+        }
+
+        .search-bar {
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 0.6rem 1rem;
+            border: 1px solid var(--gray-300);
+            border-radius: 30px;
+            transition: all 0.3s;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: var(--saumon);
+            box-shadow: 0 0 0 2px rgba(255,155,138,0.2);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .status-success {
+            background: var(--green-100);
+            color: var(--green-600);
+        }
+
+        .status-warning {
+            background: var(--yellow-100);
+            color: var(--yellow-600);
+        }
+
+        .status-info {
+            background: var(--blue-100);
+            color: var(--blue-600);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+            padding: 0.3rem 0.6rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .action-btn.edit {
+            background: var(--blue-100);
+            color: var(--blue-600);
+        }
+
+        .action-btn.delete {
+            background: var(--red-100);
+            color: var(--red-600);
+        }
+
+        .action-btn.view {
+            background: var(--green-100);
+            color: var(--green-600);
+        }
+
+        .action-btn.reply {
+            background: var(--saumon-light);
+            color: var(--saumon-dark);
+        }
+
+        .message-badge {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+        }
+
+        .message-badge.unread {
+            background: var(--red-500);
+        }
+
+        .message-badge.read {
+            background: var(--green-500);
+        }
+
+        .message-badge.replied {
+            background: var(--blue-500);
+        }
+
+        /* Modals */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 32px;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+            animation: scaleIn 0.3s ease-out;
+        }
+
+        .modal-large {
+            max-width: 700px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: transparent;
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            color: var(--gray-500);
+            transition: transform 0.3s;
+        }
+
+        .modal-close:hover {
+            transform: rotate(90deg);
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: var(--chocolate);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 60px;
+            box-shadow: var(--shadow-lg);
+            z-index: 3000;
+            display: none;
+            border-left: 4px solid var(--green-500);
+        }
+
+        .toast.show {
+            display: block;
+            animation: fadeInUp 0.3s ease-out;
+        }
+
+        .toast.error {
+            border-left-color: var(--red-500);
+        }
+
+        /* Image Preview */
+        .image-preview-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.95);
+            z-index: 4000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-preview-modal.active {
+            display: flex;
+        }
+
+        .image-preview-modal img {
+            max-width: 90vw;
+            max-height: 90vh;
+            border-radius: 20px;
+        }
+
+        .image-preview-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: transform 0.3s;
+        }
+
+        .image-preview-close:hover {
+            transform: rotate(90deg);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .products-grid, .blog-grid, .services-grid, .zones-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .admin-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .charts-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-desktop, .top-bar-tagline {
+                display: none;
+            }
+            .mobile-menu-btn {
+                display: block;
+            }
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero-buttons {
+                justify-content: center;
+            }
+            .products-grid, .training-grid, .blog-grid, .contact-grid, .services-grid, .zones-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            .admin-sidebar {
+                transform: translateX(-100%);
+            }
+            .admin-sidebar.open {
+                transform: translateX(0);
+            }
+            .admin-main {
+                margin-left: 0;
+            }
+            .admin-mobile-toggle {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            .admin-stats {
+                grid-template-columns: 1fr;
+            }
+            .action-buttons {
+                flex-wrap: wrap;
+            }
+        }
+
+        .text-center { text-align: center; }
+        .mt-3 { margin-top: 1rem; }
+        .mt-4 { margin-top: 2rem; }
+        .mb-3 { margin-bottom: 1rem; }
+        .flex { display: flex; }
+        .gap-2 { gap: 0.5rem; }
+        .w-full { width: 100%; }
+        .section-title { text-align: center; font-size: 2rem; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <div id="toast" class="toast"></div>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <div class="brand-name">TOUR <span>DE</span> CONTRÔLE</div>
+                <div class="top-bar-tagline" id="topBarTagline">L'Excellence Pâtissière à Votre Portée</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo-container" data-page="home">
+                    <img src="images/logoTR.jpeg" alt="Logo" class="logo-image">
+                </a>
+                <nav class="nav-desktop" id="navDesktop"></nav>
+                <div class="header-actions">
+                    <div class="lang-selector">
+                        <button class="lang-btn active" data-lang="fr">FR</button>
+                        <button class="lang-btn" data-lang="en">EN</button>
+                    </div>
+                    <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <div class="container">
+                <nav class="mobile-nav" id="mobileNav"></nav>
+                <div class="mobile-lang-selector">
+                    <button class="mobile-lang-btn active" data-lang="fr">Français</button>
+                    <button class="mobile-lang-btn" data-lang="en">English</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="mainContent"></main>
+
+    <!-- Social Floating Buttons -->
+    <div class="social-float-container">
+        <a href="https://wa.me/237690458799" target="_blank" class="social-float-btn float-whatsapp"><i class="fab fa-whatsapp"></i></a>
+        <a href=" https://www.tiktok.com/@tour.de.contrle90?_r=1&_t=ZS-95klwKCiEvk" target="_blank" class="social-float-btn float-tiktok"><i class="fab fa-tiktok"></i></a>
+        <a href="https://www.facebook.com/share/1DciN84ENY/?mibextid=wwXIfr" target="_blank" class="social-float-btn float-facebook"><i class="fab fa-facebook-f"></i></a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+    
+                    <h3>TOUR <span>DE</span> CONTRÔLE</h3>
+                    <p id="footerDesc">L'excellence pâtissière artisanale depuis 2020.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/share/1DciN84ENY/?mibextid=wwXIfr" target="_blank" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href=" https://www.tiktok.com/@tour.de.contrle90?_r=1&_t=ZS-95klwKCiEvk" target="_blank" class="social-link"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://wa.me/237690458799" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4 id="footerNavTitle">Navigation</h4>
+                    <ul id="footerNav"></ul>
+                </div>
+                <div class="footer-links">
+                    <h4 id="footerInfoTitle">Informations</h4>
+                    <ul id="footerInfo"></ul>
+                </div>
+                <div class="footer-contact">
+                    <h4 id="footerContactTitle">Contact</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> <span id="footerAddress">Immeuble Socropole, Mvog Mbi, Yaoundé</span></p>
+                    <p><i class="fas fa-phone"></i> <span id="footerPhone">+237 690 458 799</span></p>
+                    <p><i class="fas fa-envelope"></i> <span id="footerEmail">contact@tourdecontrole.cm</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                <span id="footerCopyright">© 2024 TOUR DE CONTRÔLE</span>
+                <a href="#" class="admin-link" data-page="admin-login"><i class="fas fa-lock"></i> <span id="adminAccessText">Accès Administrateur</span></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('bookingModal')">&times;</button>
+            <h3 class="modal-title">📅 Réserver une formation</h3>
+            <form id="bookingForm">
+                <div class="form-group">
+                    <label class="form-label">Formation</label>
+                    <input type="text" id="trainingName" class="form-input" readonly>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Nom complet *</label>
+                    <input type="text" id="bookingName" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email *</label>
+                    <input type="email" id="bookingEmail" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Téléphone *</label>
+                    <input type="tel" id="bookingPhone" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Date souhaitée</label>
+                    <input type="date" id="bookingDate" class="form-input">
+                </div>
+                <button type="submit" class="btn btn-primary w-full">Confirmer</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="productModal" class="modal">
+        <div class="modal-content modal-large">
+            <button class="modal-close" onclick="closeModal('productModal')">&times;</button>
+            <h3 class="modal-title" id="productModalTitle">Ajouter un produit</h3>
+            <form id="productForm">
+                <input type="hidden" id="productId">
+                <div class="form-group">
+                    <label class="form-label">Nom du produit *</label>
+                    <input type="text" id="productName" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Catégorie *</label>
+                    <select id="productCategory" class="form-select">
+                        <option value="birthday">Anniversaire</option>
+                        <option value="wedding">Mariage</option>
+                        <option value="pastry">Pâtisserie Fraîche</option>
+                        <option value="dry">Pâtisserie Sèche</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Prix (FCFA) *</label>
+                    <input type="number" id="productPrice" class="form-input" required min="0">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Stock</label>
+                    <select id="productStock" class="form-select">
+                        <option value="En stock">En stock</option>
+                        <option value="Sur commande">Sur commande</option>
+                        <option value="Rupture">Rupture</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Image</label>
+                    <div class="image-upload-area" id="imageUploadArea">
+                        <i class="fas fa-cloud-upload-alt" style="font-size: 2rem; color: var(--saumon);"></i>
+                        <p>Cliquez ou déposez une image</p>
+                        <input type="file" id="productImageFile" accept="image/*" style="display: none;">
+                        <input type="hidden" id="productImageUrl">
+                    </div>
+                    <img id="imagePreview" class="image-preview" style="display: none;">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <textarea id="productDescription" class="form-textarea" rows="3"></textarea>
+                </div>
+                <div class="flex gap-2">
+                    <button type="submit" class="btn btn-primary" style="flex:1;">Enregistrer</button>
+                    <button type="button" class="btn btn-secondary" style="flex:1;" onclick="closeModal('productModal')">Annuler</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('deleteModal')">&times;</button>
+            <h3 class="modal-title">⚠️ Confirmer la suppression</h3>
+            <p>Cette action est irréversible.</p>
+            <input type="hidden" id="deleteItemId">
+            <input type="hidden" id="deleteItemType">
+            <div class="flex gap-2 mt-3">
+                <button class="btn btn-danger" style="flex:1;" onclick="confirmDelete()">Supprimer</button>
+                <button class="btn btn-secondary" style="flex:1;" onclick="closeModal('deleteModal')">Annuler</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="messageModal" class="modal">
+        <div class="modal-content modal-large">
+            <button class="modal-close" onclick="closeModal('messageModal')">&times;</button>
+            <h3 class="modal-title">💬 Détails du message</h3>
+            <div id="messageContent"></div>
+            <div class="mt-3">
+                <textarea id="replyMessage" class="form-textarea" rows="4" placeholder="Votre réponse..."></textarea>
+                <div class="flex gap-2 mt-3">
+                    <button class="btn btn-primary" onclick="sendReply()">📤 Envoyer la réponse</button>
+                    <button class="btn btn-secondary" onclick="markAsRead()">✅ Marquer comme lu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="viewProductModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('viewProductModal')">&times;</button>
+            <h3 class="modal-title">👁️ Détails du produit</h3>
+            <div id="viewProductContent"></div>
+        </div>
+    </div>
+
+    <div class="image-preview-modal" id="imagePreviewModal">
+        <button class="image-preview-close" onclick="closeImagePreview()">&times;</button>
+        <img id="imagePreviewImg" src="" alt="Preview">
+    </div>
+
+    <script>
+        // ==================== TRANSLATIONS ====================
+        const translations = {
+            fr: {
+                topBarTagline: "L'Excellence Pâtissière à Votre Portée", home: "Accueil", products: "Produits", training: "Formations", delivery: "Livraison", blog: "Blog", contact: "Contact",
+                hero_badge: "✨ Pâtisserie Artisanale d'Exception", hero_title1: "TOUR DE CONTRÔLE", hero_title2: "L'Art de la Pâtisserie",
+                order_now: "Commander", learn_more: "En savoir plus", our_creations: "Nos créations", creations_subtitle: "Découvrez nos gâteaux d'exception",
+                category_all: "Tous", category_birthday: "Anniversaire", category_wedding: "Mariage", category_fresh: "Fraîche", category_dry: "Sèche",
+                our_trainings: "Nos formations", training_subtitle: "Devenez expert en pâtisserie", fresh_training: "Pâtisserie Fraîche", dry_training: "Pâtisserie Sèche",
+                duration: "Durée", weeks4: "4 semaines", weeks3: "3 semaines", places_available: "places", next_session: "Prochaine session",
+                delivery_title: "Livraison & Services", delivery_subtitle: "Service premium", home_delivery: "Livraison", pickup: "Retrait", free: "Gratuit",
+                blog_title: "Blog & inspirations", blog_subtitle: "Conseils et actualités", read_more: "Lire la suite",
+                contact_title: "Contactez-nous", send_message: "Envoyez-nous un message", full_name: "Nom complet", email: "Email", phone: "Téléphone", message: "Message", send: "Envoyer",
+                admin_login_title: "Espace Administration", login: "Se connecter", back_to_site: "Retour au site", dashboard: "Tableau de bord", overview: "Vue d'ensemble",
+                orders: "Commandes", students: "Étudiants", messages: "Messages", settings: "Paramètres", logout: "Déconnexion", total_orders: "Commandes",
+                revenue: "CA", active_students: "Étudiants", products_count: "Produits", recent_orders: "Commandes récentes", add_product: "Ajouter",
+                name: "Nom", category: "Catégorie", price: "Prix", stock: "Stock", actions: "Actions", status: "Statut", client: "Client", product: "Produit",
+                amount: "Montant", date: "Date", edit: "Modifier", delete: "Supprimer", view: "Voir", save: "Enregistrer", cancel: "Annuler",
+                connection_success: "Connexion réussie !", logout_success: "Déconnexion réussie", product_added: "Produit ajouté", product_updated: "Produit modifié",
+                product_deleted: "Produit supprimé", status_updated: "Statut mis à jour", message_sent: "Message envoyé", search: "Rechercher..."
+            },
+            en: {
+                topBarTagline: "Pastry Excellence at Your Doorstep", home: "Home", products: "Products", training: "Training", delivery: "Delivery", blog: "Blog", contact: "Contact",
+                hero_badge: "✨ Exceptional Artisanal Pastry", hero_title1: "TOUR DE CONTRÔLE", hero_title2: "The Art of Pastry",
+                order_now: "Order Now", learn_more: "Learn more", our_creations: "Our creations", creations_subtitle: "Discover our exceptional cakes",
+                category_all: "All", category_birthday: "Birthday", category_wedding: "Wedding", category_fresh: "Fresh", category_dry: "Dry",
+                our_trainings: "Our trainings", training_subtitle: "Become a pastry expert", fresh_training: "Fresh Pastry", dry_training: "Dry Pastry",
+                duration: "Duration", weeks4: "4 weeks", weeks3: "3 weeks", places_available: "places", next_session: "Next session",
+                delivery_title: "Delivery & Services", delivery_subtitle: "Premium service", home_delivery: "Delivery", pickup: "Pickup", free: "Free",
+                blog_title: "Blog & inspiration", blog_subtitle: "Tips and news", read_more: "Read more",
+                contact_title: "Contact us", send_message: "Send us a message", full_name: "Full name", email: "Email", phone: "Phone", message: "Message", send: "Send",
+                admin_login_title: "Administration Area", login: "Login", back_to_site: "Back to site", dashboard: "Dashboard", overview: "Overview",
+                orders: "Orders", students: "Students", messages: "Messages", settings: "Settings", logout: "Logout", total_orders: "Orders",
+                revenue: "Revenue", active_students: "Students", products_count: "Products", recent_orders: "Recent orders", add_product: "Add",
+                name: "Name", category: "Category", price: "Price", stock: "Stock", actions: "Actions", status: "Status", client: "Client", product: "Product",
+                amount: "Amount", date: "Date", edit: "Edit", delete: "Delete", view: "View", save: "Save", cancel: "Cancel",
+                connection_success: "Login successful!", logout_success: "Logout successful", product_added: "Product added", product_updated: "Product updated",
+                product_deleted: "Product deleted", status_updated: "Status updated", message_sent: "Message sent", search: "Search..."
+            }
+        };
+
+        // ==================== APP STATE ====================
+        const appState = {
+            currentPage: 'home',
+            language: 'fr',
+            isAuthenticated: false,
+            user: null,
+            adminActivePage: 'overview',
+            adminSidebarOpen: false,
+            adminPassword: localStorage.getItem('tdc_admin_password') || 'admin123',
+            products: JSON.parse(localStorage.getItem('tdc_products') || `[{"id":1,"name":"Gâteau Chocolat Intense","category":"birthday","categoryName":"Anniversaire","price":18000,"stock":"En stock","description":"Délicieux gâteau au chocolat","image":"https://images.pexels.com/photos/291528/pexels-photo-291528.jpeg?w=400"},{"id":2,"name":"Pièce Montée Élégance","category":"wedding","categoryName":"Mariage","price":150000,"stock":"Sur commande","description":"Pièce montée élégante","image":"https://images.pexels.com/photos/1721934/pexels-photo-1721934.jpeg?w=400"},{"id":3,"name":"Millefeuille Vanille","category":"pastry","categoryName":"Pâtisserie Fraîche","price":3500,"stock":"En stock","description":"Millefeuille à la vanille","image":"https://images.pexels.com/photos/1126359/pexels-photo-1126359.jpeg?w=400"},{"id":4,"name":"Macarons Assortis","category":"dry","categoryName":"Pâtisserie Sèche","price":5000,"stock":"En stock","description":"Assortiment de macarons","image":"https://images.pexels.com/photos/239578/pexels-photo-239578.jpeg?w=400"}]`),
+            orders: JSON.parse(localStorage.getItem('tdc_orders') || `[{"id":1,"client":"Marie K.","product":"Gâteau Chocolat","amount":18000,"status":"Livré","date":"2024-12-15"},{"id":2,"client":"Paul B.","product":"Macarons","amount":10000,"status":"En cours","date":"2024-12-16"},{"id":3,"client":"Sophie L.","product":"Millefeuille","amount":3500,"status":"Confirmé","date":"2024-12-14"}]`),
+            students: JSON.parse(localStorage.getItem('tdc_students') || `[{"id":1,"name":"Alice Kouam","formation":"Pâtisserie Fraîche","date":"2024-12-10","status":"Confirmé"},{"id":2,"name":"Jean Ndongo","formation":"Pâtisserie Sèche","date":"2025-01-05","status":"Confirmé"}]`),
+            contacts: JSON.parse(localStorage.getItem('tdc_contacts') || `[{"id":1,"name":"Test User","email":"test@example.com","phone":"690000000","subject":"Information formation","message":"Bonjour, je souhaite plus d'informations sur les formations.","date":"2024-12-20","status":"Non lu","reply":null}]`),
+            shopSettings: JSON.parse(localStorage.getItem('tdc_shop_settings') || `{"name":"TOUR DE CONTRÔLE","email":"contact@tourdecontrole.cm","phone":"+237 690 458 799","whatsapp":"237690458799","address":"Immeuble Socropole, Mvog Mbi, Yaoundé"}`)
+        };
+
+        let charts = { salesChart: null, categoryChart: null };
+        let currentMessageId = null;
+        let currentProductImageFile = null;
+
+        function saveData() {
+            localStorage.setItem('tdc_products', JSON.stringify(appState.products));
+            localStorage.setItem('tdc_orders', JSON.stringify(appState.orders));
+            localStorage.setItem('tdc_students', JSON.stringify(appState.students));
+            localStorage.setItem('tdc_contacts', JSON.stringify(appState.contacts));
+            localStorage.setItem('tdc_shop_settings', JSON.stringify(appState.shopSettings));
+        }
+
+        function t(key) { return translations[appState.language][key] || key; }
+
+        function showToast(msg, type = 'success') {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.className = `toast ${type} show`;
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+        function openModal(id) { document.getElementById(id).classList.add('active'); }
+        function formatPrice(p) { return (p || 0).toLocaleString() + ' FCFA'; }
+        function getCategoryName(c) { const m = { birthday: 'Anniversaire', wedding: 'Mariage', pastry: 'Pâtisserie Fraîche', dry: 'Pâtisserie Sèche' }; return m[c] || c; }
+        function getStatusClass(s) { const m = { 'Livré': 'success', 'Confirmé': 'info', 'En cours': 'warning', 'Non lu': 'warning', 'Lu': 'info', 'Répondu': 'success' }; return m[s] || 'info'; }
+        function closeImagePreview() { document.getElementById('imagePreviewModal').classList.remove('active'); }
+        function openImagePreview(src) { document.getElementById('imagePreviewImg').src = src; document.getElementById('imagePreviewModal').classList.add('active'); }
+
+        // Image upload handling
+        function setupImageUpload() {
+            const uploadArea = document.getElementById('imageUploadArea');
+            const fileInput = document.getElementById('productImageFile');
+            if (!uploadArea) return;
+
+            uploadArea.addEventListener('click', () => fileInput.click());
+            fileInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        const imgPreview = document.getElementById('imagePreview');
+                        imgPreview.src = event.target.result;
+                        imgPreview.style.display = 'block';
+                        document.getElementById('productImageUrl').value = event.target.result;
+                        currentProductImageFile = event.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+
+        // Navigation
+        function updateUILanguage() {
+            document.getElementById('topBarTagline').textContent = t('topBarTagline');
+            document.getElementById('footerDesc').textContent = t('topBarTagline');
+            document.getElementById('footerNavTitle').textContent = t('products');
+            document.getElementById('footerInfoTitle').textContent = t('contact');
+            document.getElementById('footerContactTitle').textContent = t('contact');
+            document.getElementById('footerCopyright').textContent = `© 2024 TOUR DE CONTRÔLE - ${t('topBarTagline')}`;
+            document.getElementById('adminAccessText').textContent = t('admin_login_title');
+            updateNavigationMenus();
+            const infoLinks = [
+                { page: 'mentions', label: 'Mentions légales' },
+                { page: 'privacy', label: 'Confidentialité' },
+                { page: 'cgv', label: 'CGV' }
+            ];
+            document.getElementById('footerInfo').innerHTML = infoLinks.map(i => `<li><a href="#" onclick="openLegalPage('${i.page}'); return false;">${i.label}</a></li>`).join('');
+            if (!['admin-login', 'admin-dashboard'].includes(appState.currentPage)) navigateTo(appState.currentPage);
+        }
+
+        function updateNavigationMenus() {
+            const items = ['home', 'products', 'training', 'delivery', 'blog', 'contact'];
+            document.getElementById('navDesktop').innerHTML = items.map(i => `<a href="#" class="nav-link ${appState.currentPage === i ? 'active' : ''}" data-page="${i}">${t(i)}</a>`).join('');
+            document.getElementById('mobileNav').innerHTML = items.map(i => `<a href="#" class="mobile-nav-link ${appState.currentPage === i ? 'active' : ''}" data-page="${i}">${t(i)}</a>`).join('');
+            document.getElementById('footerNav').innerHTML = items.map(i => `<li><a href="#" data-page="${i}">${t(i)}</a></li>`).join('');
+            attachPageLinks();
+        }
+
+        function navigateTo(page) {
+            appState.currentPage = page;
+            document.querySelectorAll('.nav-link, .mobile-nav-link').forEach(l => {
+                l.classList.remove('active');
+                if (l.dataset.page === page) l.classList.add('active');
+            });
+            document.getElementById('mobileMenu')?.classList.remove('active');
+            switch (page) {
+                case 'home': renderHomePage(); break;
+                case 'products': renderProductsPage(); break;
+                case 'training': renderTrainingPage(); break;
+                case 'delivery': renderDeliveryPage(); break;
+                case 'blog': renderBlogPage(); break;
+                case 'contact': renderContactPage(); break;
+                case 'admin-login': renderAdminLoginPage(); break;
+                case 'admin-dashboard': renderAdminDashboardPage(); break;
+                default: renderHomePage();
+            }
+            updateNavigationMenus();
+            window.scrollTo(0, 0);
+        }
+
+        function attachPageLinks() {
+            document.querySelectorAll('[data-page]').forEach(l => l.addEventListener('click', e => { e.preventDefault(); navigateTo(l.dataset.page); }));
+        }
+
+        function logout() {
+            appState.isAuthenticated = false;
+            showToast(t('logout_success'));
+            navigateTo('home');
+        }
+
+        function toggleAdminSidebar() {
+            const sidebar = document.getElementById('adminSidebar');
+            sidebar.classList.toggle('open');
+        }
+
+        // Page renderers
+        function renderHomePage() {
+            document.getElementById('mainContent').innerHTML = `
+                <section class="hero"><div class="container"><div class="hero-grid"><div class="hero-content"><div class="hero-badge">${t('hero_badge')}</div><h1 class="hero-title"><span class="hero-title-line1">${t('hero_title1')}</span><span class="hero-title-line2">${t('hero_title2')}</span></h1><p class="hero-description">${t('hero_desc') || 'Des créations uniques pour vos moments précieux.'}</p><div class="hero-buttons"><a href="#" class="btn btn-primary" data-page="products">${t('order_now')} <i class="fas fa-arrow-right"></i></a><a href="#" class="btn btn-secondary" data-page="products">${t('learn_more')}</a></div></div><div class="hero-image"><img src="https://images.pexels.com/photos/1854652/pexels-photo-1854652.jpeg?w=600" alt="Pâtisserie"></div></div></div></section>
+                <section class="products-section"><div class="container"><h2 class="section-title">${t('our_creations')}</h2><div class="products-grid" id="featuredProducts"></div><div class="text-center mt-4"><a href="#" class="btn btn-primary" data-page="products">${t('see_all_products') || 'Voir tout'} <i class="fas fa-arrow-right"></i></a></div></div></section>`;
+            const featured = appState.products.slice(0, 3);
+            document.getElementById('featuredProducts').innerHTML = featured.map(p => `
+                <div class="product-card"><div class="product-image" onclick="openImagePreview('${p.image}')"><img src="${p.image}" alt="${p.name}"><span class="product-category">${p.categoryName}</span></div><div class="product-content"><h3 class="product-title">${p.name}</h3><p class="product-price">${formatPrice(p.price)}</p><div class="product-actions"><a href="https://wa.me/${appState.shopSettings.whatsapp}?text=Commande%20${encodeURIComponent(p.name)}" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> ${t('order_now')}</a></div></div></div>
+            `).join('');
+            attachPageLinks();
+        }
+
+        function renderProductsPage() {
+            document.getElementById('mainContent').innerHTML = `
+                <div class="page-header"><div class="container"><h1 class="page-title">${t('products')}</h1><p class="page-subtitle">${t('creations_subtitle')}</p></div></div>
+                <section class="products-section"><div class="container"><div class="category-filter">${['all', 'birthday', 'wedding', 'pastry', 'dry'].map(c => `<button class="category-btn ${c === 'all' ? 'active' : ''}" data-category="${c}">${t('category_' + c)}</button>`).join('')}</div><div class="products-grid" id="productsGrid"></div></div></section>`;
+            renderProductsGrid('all');
+            document.querySelectorAll('.category-btn').forEach(b => b.addEventListener('click', function() {
+                document.querySelectorAll('.category-btn').forEach(x => x.classList.remove('active'));
+                this.classList.add('active');
+                renderProductsGrid(this.dataset.category);
+            }));
+            attachPageLinks();
+        }
+
+        function renderProductsGrid(cat) {
+            const filtered = cat === 'all' ? appState.products : appState.products.filter(p => p.category === cat);
+            document.getElementById('productsGrid').innerHTML = filtered.map(p => `
+                <div class="product-card"><div class="product-image" onclick="openImagePreview('${p.image}')"><img src="${p.image}" alt="${p.name}"><span class="product-category">${p.categoryName}</span></div><div class="product-content"><h3 class="product-title">${p.name}</h3><p class="product-price">${formatPrice(p.price)}</p><div class="product-actions"><a href="https://wa.me/${appState.shopSettings.whatsapp}?text=Commande%20${encodeURIComponent(p.name)}" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> ${t('order_now')}</a></div></div></div>
+            `).join('');
+        }
+
+        function renderTrainingPage() {
+            document.getElementById('mainContent').innerHTML = `
+                <div class="page-header"><div class="container"><h1 class="page-title">${t('our_trainings')}</h1><p class="page-subtitle">${t('training_subtitle')}</p></div></div>
+                <section class="training-section"><div class="container"><div class="training-grid">
+                    <div class="training-card"><div class="training-image"><img src="https://images.pexels.com/photos/3992208/pexels-photo-3992208.jpeg?w=600"><div class="training-badge">⭐ Certification</div></div><div class="training-content"><h3 class="training-title">${t('fresh_training')}</h3><p>Maîtrisez l'art des entremets, choux, crèmes.</p><ul class="training-details"><li><i class="fas fa-clock"></i> ${t('duration')}: ${t('weeks4')} (80h)</li><li><i class="fas fa-users"></i> 8 ${t('places_available')}</li><li><i class="fas fa-certificate"></i> Certificat inclus</li></ul><p class="training-price">250 000 FCFA</p><button class="btn btn-primary" onclick="bookTraining('Pâtisserie Fraîche')">${t('book_place') || 'Réserver'}</button></div></div>
+                    <div class="training-card"><div class="training-image"><img src="https://images.pexels.com/photos/2067396/pexels-photo-2067396.jpeg?w=600"><div class="training-badge">🎓 Reconnue</div></div><div class="training-content"><h3 class="training-title">${t('dry_training')}</h3><p>Apprenez les techniques des macarons, madeleines.</p><ul class="training-details"><li><i class="fas fa-clock"></i> ${t('duration')}: ${t('weeks3')} (60h)</li><li><i class="fas fa-users"></i> 10 ${t('places_available')}</li><li><i class="fas fa-certificate"></i> Certificat inclus</li></ul><p class="training-price">200 000 FCFA</p><button class="btn btn-primary" onclick="bookTraining('Pâtisserie Sèche')">${t('book_place') || 'Réserver'}</button></div></div>
+                </div></div></section>`;
+            attachPageLinks();
+        }
+
+        function renderDeliveryPage() {
+            const zones = ['Mvog Mbi', 'Bastos', 'Biyem-Assi', 'Melen', 'Nlongkak', 'Mvog Ada', 'Elig Essono', 'Mokolo'];
+            document.getElementById('mainContent').innerHTML = `
+                <div class="page-header"><div class="container"><h1 class="page-title">${t('delivery_title')}</h1><p class="page-subtitle">${t('delivery_subtitle')}</p></div></div>
+                <section class="delivery-section"><div class="container">
+                    <div class="services-grid">
+                        <div class="service-card"><div class="service-icon"><i class="fas fa-truck"></i></div><h3 class="service-title">${t('home_delivery')}</h3><div class="service-price">2 000 FCFA</div></div>
+                        <div class="service-card"><div class="service-icon"><i class="fas fa-store"></i></div><h3 class="service-title">${t('pickup')}</h3><div class="service-price">${t('free')}</div></div>
+                        <div class="service-card"><div class="service-icon"><i class="fas fa-calendar-check"></i></div><h3 class="service-title">Service traiteur</h3><div class="service-price">Sur devis</div></div>
+                    </div>
+                    <div class="delivery-zones"><div class="zones-header"><i class="fas fa-map-marked-alt"></i><h3>Nos zones de livraison</h3></div><div class="zones-grid">${zones.map(z => `<div class="zone-item"><i class="fas fa-check-circle"></i><span>${z}</span></div>`).join('')}</div></div>
+                    <div class="delivery-cta"><h3>Prêt à commander ?</h3><p>Commandez en quelques clics via WhatsApp</p><div class="mt-3"><a href="https://wa.me/${appState.shopSettings.whatsapp}" target="_blank" class="btn btn-primary"><i class="fab fa-whatsapp"></i> WhatsApp</a></div></div>
+                </div></section>`;
+            attachPageLinks();
+        }
+
+        function renderBlogPage() {
+            const posts = [
+                { title: "10 astuces pour des macarons parfaits", excerpt: "Découvrez nos secrets pour réussir des macarons à coup sûr. Maîtrisez le macaronnage et le croûtage.", image: "https://images.pexels.com/photos/3026804/pexels-photo-3026804.jpeg?w=600", date: "15 Déc 2024", readTime: "5 min" },
+                { title: "Recette : Gâteau au chocolat fondant", excerpt: "Une recette facile et irrésistible pour les amateurs de chocolat. Parfait pour toutes les occasions.", image: "https://images.pexels.com/photos/2067396/pexels-photo-2067396.jpeg?w=600", date: "10 Déc 2024", readTime: "7 min" },
+                { title: "Les tendances pâtissières 2025", excerpt: "Découvrez les nouvelles tendances qui feront fureur cette année : végan, sans gluten, et plus encore.", image: "https://images.pexels.com/photos/291528/pexels-photo-291528.jpeg?w=600", date: "5 Déc 2024", readTime: "4 min" },
+                { title: "Comment organiser un tea time réussi", excerpt: "Toutes nos astuces pour un goûter parfait avec friends & family, de la vaisselle aux pâtisseries.", image: "https://images.pexels.com/photos/1721934/pexels-photo-1721934.jpeg?w=600", date: "28 Nov 2024", readTime: "6 min" },
+                { title: "L'art du montage des pièces montées", excerpt: "Techniques professionnelles pour réaliser des pièces montées spectaculaires pour vos mariages.", image: "https://images.pexels.com/photos/1126359/pexels-photo-1126359.jpeg?w=600", date: "20 Nov 2024", readTime: "8 min" },
+                { title: "Chocolat : tout ce que vous devez savoir", excerpt: "Guide complet sur le chocolat : origines, types, tempérage et utilisations en pâtisserie.", image: "https://images.pexels.com/photos/239578/pexels-photo-239578.jpeg?w=600", date: "15 Nov 2024", readTime: "6 min" }
+            ];
+            document.getElementById('mainContent').innerHTML = `
+                <div class="page-header"><div class="container"><h1 class="page-title">${t('blog_title')}</h1><p class="page-subtitle">${t('blog_subtitle')}</p></div></div>
+                <section class="blog-section"><div class="container"><div class="blog-grid">${posts.map(p => `
+                    <div class="blog-card"><div class="blog-image"><img src="${p.image}" alt="${p.title}"><div class="blog-overlay"><i class="far fa-clock"></i> ${p.readTime}</div></div><div class="blog-content"><div class="blog-meta"><span><i class="far fa-calendar-alt"></i> ${p.date}</span><span><i class="far fa-heart"></i> 123</span></div><h3 class="blog-title">${p.title}</h3><p class="blog-excerpt">${p.excerpt}</p><a href="#" class="blog-link">${t('read_more')} <i class="fas fa-arrow-right"></i></a></div></div>
+                `).join('')}</div></div></section>`;
+            attachPageLinks();
+        }
+
+        function renderContactPage() {
+            document.getElementById('mainContent').innerHTML = `
+                <div class="page-header"><div class="container"><h1 class="page-title">${t('contact_title')}</h1><p class="page-subtitle">Une question ? Nous sommes à votre écoute.</p></div></div>
+                <section class="contact-section"><div class="container"><div class="contact-grid">
+                    <div class="contact-form"><h3>${t('send_message')}</h3><form id="contactForm"><div class="form-group"><input type="text" name="name" placeholder="${t('full_name')}" class="form-input" required></div><div class="form-group"><input type="email" name="email" placeholder="${t('email')}" class="form-input" required></div><div class="form-group"><input type="tel" name="phone" placeholder="${t('phone')}" class="form-input"></div><div class="form-group"><textarea name="message" placeholder="${t('message')}" class="form-textarea" rows="5" required></textarea></div><button type="submit" class="btn btn-primary w-full">${t('send')}</button></form></div>
+                    <div><div class="contact-info"><h3>${t('contact_info') || 'Nos coordonnées'}</h3><div class="info-item"><i class="fas fa-map-marker-alt"></i><div><strong>Adresse</strong><p>${appState.shopSettings.address}</p></div></div><div class="info-item"><i class="fas fa-phone"></i><div><strong>Téléphone</strong><p>${appState.shopSettings.phone}</p></div></div><div class="info-item"><i class="fas fa-envelope"></i><div><strong>Email</strong><p>${appState.shopSettings.email}</p></div></div><div class="map-container"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3980.815562184084!2d11.518696673963284!3d3.84973254844883!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x108bcf8b0f7e4235%3A0x9b5434bf3db426c8!2sSOCROPOLE%2C%20Mvog-bi!5e0!3m2!1sfr!2scm!4v1777044475016!5m2!1sfr!2scm" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div></div></div>
+                </div></div></section>`;
+            attachPageLinks();
+            document.getElementById('contactForm')?.addEventListener('submit', e => {
+                e.preventDefault();
+                const fd = new FormData(e.target);
+                appState.contacts.push({ id: Date.now(), name: fd.get('name'), email: fd.get('email'), phone: fd.get('phone') || '', message: fd.get('message'), date: new Date().toISOString().split('T')[0], status: 'Non lu', reply: null });
+                saveData();
+                showToast(t('message_sent'));
+                e.target.reset();
+            });
+        }
+
+        // Admin functions
+        function renderAdminLoginPage() {
+            document.getElementById('mainContent').innerHTML = `
+                <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg, var(--saumon-light), var(--cream));padding:2rem;">
+                    <div style="background:white;padding:2.5rem;border-radius:32px;max-width:400px;width:100%;box-shadow:var(--shadow-xl);">
+                        <div class="text-center"><div style="width:70px;height:70px;background:var(--saumon-light);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;"><i class="fas fa-lock" style="font-size:2rem;color:var(--saumon-dark);"></i></div><h2>${t('admin_login_title')}</h2></div>
+                        <form id="adminLoginForm"><div class="form-group"><input type="email" id="adminEmail" class="form-input" value="admin@tourdecontrole.cm" readonly></div><div class="form-group"><input type="password" id="adminPassword" class="form-input" placeholder="Mot de passe" required></div><button type="submit" class="btn btn-primary w-full">${t('login')}</button></form>
+                        <div class="text-center mt-3"><a href="#" data-page="home" style="color:var(--gray-500);">← ${t('back_to_site')}</a></div>
+                    </div>
+                </div>`;
+            attachPageLinks();
+            document.getElementById('adminLoginForm').addEventListener('submit', e => {
+                e.preventDefault();
+                const pwd = document.getElementById('adminPassword').value;
+                if (pwd === appState.adminPassword) {
+                    appState.isAuthenticated = true;
+                    appState.user = { name: 'Admin' };
+                    showToast(t('connection_success'));
+                    setTimeout(() => navigateTo('admin-dashboard'), 500);
+                } else showToast('Mot de passe incorrect', 'error');
+            });
+        }
+
+        function renderAdminDashboardPage() {
+            if (!appState.isAuthenticated) { navigateTo('admin-login'); return; }
+            document.getElementById('mainContent').innerHTML = `
+                <div class="admin-dashboard">
+                    <div class="admin-sidebar" id="adminSidebar">
+                        <div class="admin-sidebar-header"><h3>TOUR <span>DE</span> CONTRÔLE</h3><p>${t('dashboard')}</p></div>
+                        <div class="admin-user-info"><div class="admin-avatar">A</div><div><div class="admin-user-name">Administrateur</div><div class="admin-user-role">Super Admin</div></div></div>
+                        <ul class="admin-nav">
+                            <li class="admin-nav-item ${appState.adminActivePage === 'overview' ? 'active' : ''}" data-admin-page="overview"><i class="fas fa-chart-line"></i> ${t('overview')}</li>
+                            <li class="admin-nav-item ${appState.adminActivePage === 'products' ? 'active' : ''}" data-admin-page="products"><i class="fas fa-box"></i> ${t('products')}</li>
+                            <li class="admin-nav-item ${appState.adminActivePage === 'orders' ? 'active' : ''}" data-admin-page="orders"><i class="fas fa-shopping-cart"></i> ${t('orders')}</li>
+                            <li class="admin-nav-item ${appState.adminActivePage === 'students' ? 'active' : ''}" data-admin-page="students"><i class="fas fa-users"></i> ${t('students')}</li>
+                            <li class="admin-nav-item ${appState.adminActivePage === 'messages' ? 'active' : ''}" data-admin-page="messages"><i class="fas fa-envelope"></i> ${t('messages')}</li>
+                            <li class="admin-nav-item ${appState.adminActivePage === 'settings' ? 'active' : ''}" data-admin-page="settings"><i class="fas fa-cog"></i> ${t('settings')}</li>
+                        </ul>
+                        <div class="admin-nav-logout"><div class="admin-nav-item logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> ${t('logout')}</div></div>
+                    </div>
+                    <div class="admin-main" id="adminMain"><div id="adminContent"></div></div>
+                </div>
+                <button class="admin-mobile-toggle" id="adminMobileToggleBtn"><i class="fas fa-bars"></i></button>
+            `;
+            const sidebar = document.getElementById('adminSidebar');
+            const toggleBtn = document.getElementById('adminMobileToggleBtn');
+            toggleBtn?.addEventListener('click', () => sidebar.classList.toggle('open'));
+            document.addEventListener('click', (e) => {
+                if (window.innerWidth <= 768 && sidebar && !sidebar.contains(e.target) && !toggleBtn?.contains(e.target)) {
+                    sidebar.classList.remove('open');
+                }
+            });
+            setupAdminNav();
+        }
+
+        function setupAdminNav() {
+            document.querySelectorAll('[data-admin-page]').forEach(item => {
+                item.addEventListener('click', function() {
+                    document.querySelectorAll('[data-admin-page]').forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                    appState.adminActivePage = this.dataset.adminPage;
+                    const content = document.getElementById('adminContent');
+                    switch (this.dataset.adminPage) {
+                        case 'overview': content.innerHTML = renderAdminOverview(); initCharts(); break;
+                        case 'products': content.innerHTML = renderAdminProducts(); break;
+                        case 'orders': content.innerHTML = renderAdminOrders(); break;
+                        case 'students': content.innerHTML = renderAdminStudents(); break;
+                        case 'messages': content.innerHTML = renderAdminMessages(); break;
+                        case 'settings': content.innerHTML = renderAdminSettings(); break;
+                    }
+                    if (window.innerWidth <= 768) document.getElementById('adminSidebar')?.classList.remove('open');
+                });
+            });
+            document.querySelector('[data-admin-page="overview"]')?.click();
+        }
+
+        function renderAdminOverview() {
+            const revenue = appState.orders.reduce((s, o) => s + o.amount, 0);
+            const lastOrders = [...appState.orders].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 5);
+            return `
+                <div class="admin-section">
+                    <div class="admin-header"><h2>${t('overview')}</h2></div>
+                    <div class="admin-stats">
+                        <div class="stat-card"><div class="stat-value">${appState.orders.length}</div><div class="stat-label">${t('total_orders')}</div></div>
+                        <div class="stat-card"><div class="stat-value">${(revenue / 1000000).toFixed(1)}M</div><div class="stat-label">${t('revenue')}</div></div>
+                        <div class="stat-card"><div class="stat-value">${appState.students.length}</div><div class="stat-label">${t('active_students')}</div></div>
+                        <div class="stat-card"><div class="stat-value">${appState.products.length}</div><div class="stat-label">${t('products_count')}</div></div>
+                    </div>
+                    <div class="charts-container">
+                        <div class="chart-card"><h3>Ventes mensuelles</h3><canvas id="salesChart"></canvas></div>
+                        <div class="chart-card"><h3>Ventes par catégorie</h3><canvas id="categoryChart"></canvas></div>
+                    </div>
+                    <div class="admin-table-container"><h3>${t('recent_orders')}</h3><table class="admin-table"><thead><tr><th>${t('client')}</th><th>${t('product')}</th><th>${t('amount')}</th><th>${t('date')}</th><th>${t('status')}</th><th>${t('actions')}</th></tr></thead><tbody>${lastOrders.map(o => `<tr><td>${o.client}</td><td>${o.product}</td><td>${formatPrice(o.amount)}</td><td>${o.date}</td><td><span class="status-badge status-${getStatusClass(o.status)}">${o.status}</span></td><td><button class="action-btn view" onclick="viewOrder(${o.id})"><i class="fas fa-eye"></i></button></td></tr>`).join('')}</tbody></table></div>
+            `;
+        }
+
+        function initCharts() {
+            const salesCtx = document.getElementById('salesChart')?.getContext('2d');
+            const categoryCtx = document.getElementById('categoryChart')?.getContext('2d');
+            if (salesCtx) {
+                if (charts.salesChart) charts.salesChart.destroy();
+                charts.salesChart = new Chart(salesCtx, {
+                    type: 'line',
+                    data: { labels: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun'], datasets: [{ label: 'Ventes (FCFA)', data: [250000, 320000, 450000, 380000, 520000, 480000], borderColor: 'var(--saumon)', backgroundColor: 'rgba(255,155,138,0.1)', fill: true }] },
+                    options: { responsive: true, maintainAspectRatio: true }
+                });
+            }
+            if (categoryCtx) {
+                const catSales = { birthday: 0, wedding: 0, pastry: 0, dry: 0 };
+                appState.orders.forEach(o => {
+                    if (o.product.includes('Chocolat') || o.product.includes('Gâteau')) catSales.birthday += o.amount;
+                    else if (o.product.includes('Mariage') || o.product.includes('Pièce')) catSales.wedding += o.amount;
+                    else if (o.product.includes('Millefeuille')) catSales.pastry += o.amount;
+                    else catSales.dry += o.amount;
+                });
+                if (charts.categoryChart) charts.categoryChart.destroy();
+                charts.categoryChart = new Chart(categoryCtx, {
+                    type: 'doughnut',
+                    data: { labels: ['Anniversaire', 'Mariage', 'Fraîche', 'Sèche'], datasets: [{ data: [catSales.birthday, catSales.wedding, catSales.pastry, catSales.dry], backgroundColor: ['var(--saumon)', 'var(--saumon-dark)', 'var(--chocolate)', 'var(--gray-500)'] }] },
+                    options: { responsive: true }
+                });
+            }
+        }
+
+        function renderAdminProducts() {
+            return `
+                <div class="admin-section">
+                    <div class="admin-header"><h2>${t('products')}</h2><button class="btn btn-primary btn-sm" onclick="openAddProductModal()">+ ${t('add_product')}</button></div>
+                    <div class="search-bar"><input type="text" id="productSearch" placeholder="${t('search')}" onkeyup="filterProducts()"><select id="categoryFilter" onchange="filterProducts()"><option value="all">${t('category_all')}</option><option value="birthday">${t('category_birthday')}</option><option value="wedding">${t('category_wedding')}</option><option value="pastry">${t('category_fresh')}</option><option value="dry">${t('category_dry')}</option></select></div>
+                    <div class="admin-table-container"><table class="admin-table"><thead><tr><th>${t('image')}</th><th>${t('name')}</th><th>${t('category')}</th><th>${t('price')}</th><th>${t('stock')}</th><th>${t('actions')}</th></tr></thead><tbody id="productsTableBody">${renderProductsTableBody()}</tbody></table></div>
+                </div>
+            `;
+        }
+
+        function renderProductsTableBody() { return appState.products.map(p => `<tr><td><img src="${p.image}" style="width:45px;height:45px;object-fit:cover;border-radius:8px;cursor:pointer" onclick="openImagePreview('${p.image}')"></td><td>${p.name}</td><td>${p.categoryName}</td><td>${formatPrice(p.price)}</td><td>${p.stock}</td><td><div class="action-buttons"><button class="action-btn view" onclick="viewProduct(${p.id})"><i class="fas fa-eye"></i></button><button class="action-btn edit" onclick="editProduct(${p.id})"><i class="fas fa-edit"></i></button><button class="action-btn delete" onclick="deleteProduct(${p.id})"><i class="fas fa-trash"></i></button></div></td></tr>`).join(''); }
+
+        function filterProducts() {
+            const search = document.getElementById('productSearch')?.value.toLowerCase() || '';
+            const category = document.getElementById('categoryFilter')?.value || 'all';
+            const filtered = appState.products.filter(p => (category === 'all' || p.category === category) && (p.name.toLowerCase().includes(search) || p.categoryName.toLowerCase().includes(search)));
+            document.getElementById('productsTableBody').innerHTML = filtered.map(p => `<tr><td><img src="${p.image}" style="width:45px;height:45px;object-fit:cover;border-radius:8px;cursor:pointer" onclick="openImagePreview('${p.image}')"></td><td>${p.name}</td><td>${p.categoryName}</td><td>${formatPrice(p.price)}</td><td>${p.stock}</td><td><div class="action-buttons"><button class="action-btn view" onclick="viewProduct(${p.id})"><i class="fas fa-eye"></i></button><button class="action-btn edit" onclick="editProduct(${p.id})"><i class="fas fa-edit"></i></button><button class="action-btn delete" onclick="deleteProduct(${p.id})"><i class="fas fa-trash"></i></button></div></td></tr>`).join('');
+        }
+
+        function viewProduct(id) {
+            const p = appState.products.find(x => x.id === id);
+            if (p) {
+                document.getElementById('viewProductContent').innerHTML = `<img src="${p.image}" style="width:100%;border-radius:16px;margin-bottom:1rem;"><p><strong>Nom:</strong> ${p.name}</p><p><strong>Catégorie:</strong> ${p.categoryName}</p><p><strong>Prix:</strong> ${formatPrice(p.price)}</p><p><strong>Stock:</strong> ${p.stock}</p><p><strong>Description:</strong> ${p.description || 'Aucune description'}</p>`;
+                openModal('viewProductModal');
+            }
+        }
+
+        function openAddProductModal() {
+            document.getElementById('productModalTitle').innerText = 'Ajouter un produit';
+            document.getElementById('productId').value = '';
+            document.getElementById('productName').value = '';
+            document.getElementById('productCategory').value = 'birthday';
+            document.getElementById('productPrice').value = '';
+            document.getElementById('productStock').value = 'En stock';
+            document.getElementById('productDescription').value = '';
+            document.getElementById('productImageUrl').value = '';
+            document.getElementById('imagePreview').style.display = 'none';
+            currentProductImageFile = null;
+            openModal('productModal');
+            setupImageUpload();
+        }
+
+        function editProduct(id) {
+            const p = appState.products.find(x => x.id === id);
+            if (p) {
+                document.getElementById('productModalTitle').innerText = `Modifier - ${p.name}`;
+                document.getElementById('productId').value = p.id;
+                document.getElementById('productName').value = p.name;
+                document.getElementById('productCategory').value = p.category;
+                document.getElementById('productPrice').value = p.price;
+                document.getElementById('productStock').value = p.stock;
+                document.getElementById('productDescription').value = p.description || '';
+                document.getElementById('productImageUrl').value = p.image;
+                const preview = document.getElementById('imagePreview');
+                preview.src = p.image;
+                preview.style.display = 'block';
+                currentProductImageFile = p.image;
+                openModal('productModal');
+                setupImageUpload();
+            }
+        }
+
+        function deleteProduct(id) {
+            document.getElementById('deleteItemId').value = id;
+            document.getElementById('deleteItemType').value = 'product';
+            openModal('deleteModal');
+        }
+
+        function renderAdminOrders() {
+            return `<div class="admin-section"><div class="admin-header"><h2>${t('orders')}</h2></div><div class="admin-table-container"><table class="admin-table"><thead><tr><th>ID</th><th>${t('client')}</th><th>${t('product')}</th><th>${t('amount')}</th><th>${t('date')}</th><th>${t('status')}</th><th>${t('actions')}</th></tr></thead><tbody>${appState.orders.map(o => `<tr><td>#${o.id}</td><td>${o.client}</td><td>${o.product}</td><td>${formatPrice(o.amount)}</td><td>${o.date}</td><td><select onchange="updateOrderStatus(${o.id},this.value)"><option ${o.status === 'En attente' ? 'selected' : ''}>En attente</option><option ${o.status === 'Confirmé' ? 'selected' : ''}>Confirmé</option><option ${o.status === 'En cours' ? 'selected' : ''}>En cours</option><option ${o.status === 'Livré' ? 'selected' : ''}>Livré</option></select></td><td><button class="action-btn delete" onclick="deleteOrder(${o.id})"><i class="fas fa-trash"></i></button></td></tr>`).join('')}</tbody></table></div></div>`;
+        }
+
+        function renderAdminStudents() {
+            return `<div class="admin-section"><div class="admin-header"><h2>${t('students')}</h2></div><div class="admin-table-container"><table class="admin-table"><thead><tr><th>ID</th><th>${t('name')}</th><th>Formation</th><th>${t('date')}</th><th>${t('status')}</th></tr></thead><tbody>${appState.students.map(s => `<tr><td>#${s.id}</td><td>${s.name}</td><td>${s.formation}</td><td>${s.date}</td><td><span class="status-badge status-success">${s.status}</span></td></tr>`).join('')}</tbody></table></div></div>`;
+        }
+
+        function renderAdminMessages() {
+            const unreadCount = appState.contacts.filter(c => c.status === 'Non lu').length;
+            return `<div class="admin-section"><div class="admin-header"><h2>${t('messages')} ${unreadCount > 0 ? `<span style="background:var(--red-500);color:white;padding:0.2rem 0.6rem;border-radius:20px;font-size:0.7rem;">${unreadCount} non lus</span>` : ''}</h2></div><div class="admin-table-container"><table class="admin-table"><thead><tr><th>ID</th><th>${t('name')}</th><th>${t('email')}</th><th>Message</th><th>${t('date')}</th><th>${t('status')}</th><th>${t('actions')}</th></tr></thead><tbody>${appState.contacts.slice().reverse().map(c => `<tr><td>#${c.id}</td><td>${c.name}</td><td>${c.email}</td><td>${c.message?.substring(0, 40)}...</td><td>${c.date}</td><td><span class="status-badge status-${getStatusClass(c.status)}"><span class="message-badge ${c.status === 'Non lu' ? 'unread' : (c.status === 'Répondu' ? 'replied' : 'read')}"></span>${c.status}</span></td><td><div class="action-buttons"><button class="action-btn view" onclick="viewMessage(${c.id})"><i class="fas fa-eye"></i></button><button class="action-btn reply" onclick="openReplyModal(${c.id})"><i class="fas fa-reply"></i></button><button class="action-btn delete" onclick="deleteContact(${c.id})"><i class="fas fa-trash"></i></button></div></td></tr>`).join('')}</tbody></table></div></div>`;
+        }
+
+        function renderAdminSettings() {
+            return `<div class="admin-section"><div class="admin-header"><h2>${t('settings')}</h2></div>
+                <div style="margin-bottom:2rem;"><h3>Informations de la boutique</h3><div class="form-group"><label class="form-label">Nom</label><input type="text" id="shopName" class="form-input" value="${appState.shopSettings.name}"></div><div class="form-group"><label class="form-label">Email</label><input type="email" id="shopEmail" class="form-input" value="${appState.shopSettings.email}"></div><div class="form-group"><label class="form-label">Téléphone</label><input type="text" id="shopPhone" class="form-input" value="${appState.shopSettings.phone}"></div><div class="form-group"><label class="form-label">WhatsApp</label><input type="text" id="shopWhatsapp" class="form-input" value="${appState.shopSettings.whatsapp}"></div><div class="form-group"><label class="form-label">Adresse</label><input type="text" id="shopAddress" class="form-input" value="${appState.shopSettings.address}"></div><button class="btn btn-primary" onclick="updateShopSettings()">Enregistrer</button></div>
+                <hr style="margin:2rem 0;"><div><h3>Changer le mot de passe</h3><div class="form-group"><input type="password" id="currentPassword" class="form-input" placeholder="Mot de passe actuel"></div><div class="form-group"><input type="password" id="newPassword" class="form-input" placeholder="Nouveau mot de passe"></div><div class="form-group"><input type="password" id="confirmPassword" class="form-input" placeholder="Confirmer"></div><button class="btn btn-primary" onclick="changeAdminPassword()">Changer</button></div></div>`;
+        }
+
+        function updateShopSettings() {
+            appState.shopSettings = {
+                name: document.getElementById('shopName').value,
+                email: document.getElementById('shopEmail').value,
+                phone: document.getElementById('shopPhone').value,
+                whatsapp: document.getElementById('shopWhatsapp').value,
+                address: document.getElementById('shopAddress').value
+            };
+            saveData();
+            showToast('Informations mises à jour');
+            document.getElementById('footerAddress').textContent = appState.shopSettings.address;
+            document.getElementById('footerPhone').textContent = appState.shopSettings.phone;
+            document.getElementById('footerEmail').textContent = appState.shopSettings.email;
+        }
+
+        function changeAdminPassword() {
+            const current = document.getElementById('currentPassword').value;
+            const newPwd = document.getElementById('newPassword').value;
+            const confirm = document.getElementById('confirmPassword').value;
+            if (current !== appState.adminPassword) { showToast('Mot de passe actuel incorrect', 'error'); return; }
+            if (newPwd.length < 4) { showToast('Minimum 4 caractères', 'error'); return; }
+            if (newPwd !== confirm) { showToast('Les mots de passe ne correspondent pas', 'error'); return; }
+            appState.adminPassword = newPwd;
+            localStorage.setItem('tdc_admin_password', newPwd);
+            showToast('Mot de passe modifié');
+            document.getElementById('currentPassword').value = '';
+            document.getElementById('newPassword').value = '';
+            document.getElementById('confirmPassword').value = '';
+        }
+
+        function viewMessage(id) {
+            const c = appState.contacts.find(x => x.id === id);
+            currentMessageId = id;
+            if (c) {
+                document.getElementById('messageContent').innerHTML = `<p><strong>De:</strong> ${c.name}</p><p><strong>Email:</strong> ${c.email}</p><p><strong>Tél:</strong> ${c.phone || '-'}</p><p><strong>Date:</strong> ${c.date}</p><p><strong>Message:</strong></p><div style="background:var(--gray-50);padding:1rem;border-radius:12px;">${c.message}</div>${c.reply ? `<div style="margin-top:1rem;padding:1rem;background:var(--green-100);border-radius:12px;"><strong>Votre réponse:</strong><br>${c.reply}</div>` : ''}`;
+                openModal('messageModal');
+                if (c.status === 'Non lu') { c.status = 'Lu'; saveData(); if (appState.adminActivePage === 'messages') document.getElementById('adminContent').innerHTML = renderAdminMessages(); }
+            }
+        }
+
+        function openReplyModal(id) {
+            const c = appState.contacts.find(x => x.id === id);
+            if (c) {
+                currentMessageId = id;
+                document.getElementById('replyToEmail').value = c.email;
+                document.getElementById('replySubject').value = `Re: ${c.subject || 'Votre message'}`;
+                document.getElementById('replyMessageText').value = `Bonjour ${c.name},\n\nMerci pour votre message.\n\n`;
+                openModal('replyModal');
+            }
+        }
+
+        function sendReply() {
+            const reply = document.getElementById('replyMessage').value;
+            if (!reply.trim()) { showToast('Veuillez saisir une réponse', 'error'); return; }
+            const c = appState.contacts.find(x => x.id === currentMessageId);
+            if (c) { c.status = 'Répondu'; c.reply = reply; saveData(); showToast('Réponse envoyée'); closeModal('messageModal'); if (appState.adminActivePage === 'messages') document.getElementById('adminContent').innerHTML = renderAdminMessages(); }
+        }
+
+        function markAsRead() {
+            const c = appState.contacts.find(x => x.id === currentMessageId);
+            if (c && c.status === 'Non lu') { c.status = 'Lu'; saveData(); showToast('Marqué comme lu'); if (appState.adminActivePage === 'messages') document.getElementById('adminContent').innerHTML = renderAdminMessages(); }
+        }
+
+        function sendEmailReply() {
+            const reply = document.getElementById('replyMessageText').value;
+            if (!reply.trim()) { showToast('Veuillez saisir un message', 'error'); return; }
+            const c = appState.contacts.find(x => x.id === currentMessageId);
+            if (c) { c.status = 'Répondu'; c.reply = reply; saveData(); showToast(`Réponse envoyée à ${c.email}`); closeModal('replyModal'); if (appState.adminActivePage === 'messages') document.getElementById('adminContent').innerHTML = renderAdminMessages(); }
+        }
+
+        function deleteOrder(id) { document.getElementById('deleteItemId').value = id; document.getElementById('deleteItemType').value = 'order'; openModal('deleteModal'); }
+        function deleteContact(id) { document.getElementById('deleteItemId').value = id; document.getElementById('deleteItemType').value = 'contact'; openModal('deleteModal'); }
+        function viewOrder(id) { const o = appState.orders.find(x => x.id === id); if (o) alert(`Commande #${o.id}\nClient: ${o.client}\nProduit: ${o.product}\nMontant: ${formatPrice(o.amount)}\nDate: ${o.date}\nStatut: ${o.status}`); }
+        function updateOrderStatus(id, status) { const o = appState.orders.find(x => x.id === id); if (o) { o.status = status; saveData(); showToast(t('status_updated')); if (appState.adminActivePage === 'orders') document.getElementById('adminContent').innerHTML = renderAdminOrders(); } }
+
+        function confirmDelete() {
+            const id = parseInt(document.getElementById('deleteItemId').value);
+            const type = document.getElementById('deleteItemType').value;
+            if (type === 'product') { appState.products = appState.products.filter(p => p.id !== id); showToast(t('product_deleted')); if (appState.adminActivePage === 'products') document.getElementById('adminContent').innerHTML = renderAdminProducts(); }
+            else if (type === 'order') { appState.orders = appState.orders.filter(o => o.id !== id); showToast('Commande supprimée'); if (appState.adminActivePage === 'orders') document.getElementById('adminContent').innerHTML = renderAdminOrders(); }
+            else if (type === 'contact') { appState.contacts = appState.contacts.filter(c => c.id !== id); showToast('Message supprimé'); if (appState.adminActivePage === 'messages') document.getElementById('adminContent').innerHTML = renderAdminMessages(); }
+            saveData();
+            closeModal('deleteModal');
+            if (['home', 'products'].includes(appState.currentPage)) navigateTo(appState.currentPage);
+        }
+
+        function bookTraining(name) { document.getElementById('trainingName').value = name; openModal('bookingModal'); }
+        function openLegalPage(page) { alert(`Page ${page} - Contenu à venir`); }
+
+        // Product form submit with image
+        document.getElementById('productForm')?.addEventListener('submit', e => {
+            e.preventDefault();
+            const image = document.getElementById('productImageUrl').value || currentProductImageFile || 'https://placehold.co/400x400/ff9b8a/white?text=Gateau';
+            const data = {
+                name: document.getElementById('productName').value,
+                category: document.getElementById('productCategory').value,
+                categoryName: getCategoryName(document.getElementById('productCategory').value),
+                price: parseInt(document.getElementById('productPrice').value),
+                stock: document.getElementById('productStock').value,
+                image: image,
+                description: document.getElementById('productDescription').value
+            };
+            const id = document.getElementById('productId').value;
+            if (id) {
+                const idx = appState.products.findIndex(p => p.id === parseInt(id));
+                if (idx !== -1) appState.products[idx] = { ...appState.products[idx], ...data };
+                showToast(t('product_updated'));
+            } else {
+                data.id = Math.max(...appState.products.map(p => p.id), 0) + 1;
+                appState.products.push(data);
+                showToast(t('product_added'));
+            }
+            saveData();
+            closeModal('productModal');
+            if (appState.adminActivePage === 'products') document.getElementById('adminContent').innerHTML = renderAdminProducts();
+            if (['home', 'products'].includes(appState.currentPage)) navigateTo(appState.currentPage);
+        });
+
+        document.getElementById('bookingForm')?.addEventListener('submit', e => {
+            e.preventDefault();
+            closeModal('bookingModal');
+            showToast('Réservation confirmée ! Nous vous contacterons.');
+            e.target.reset();
+        });
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            updateUILanguage();
+            renderHomePage();
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenuBtn?.addEventListener('click', () => {
+                mobileMenu.classList.toggle('active');
+                mobileMenuBtn.querySelector('i').className = mobileMenu.classList.contains('active') ? 'fas fa-times' : 'fas fa-bars';
+            });
+            document.querySelectorAll('.lang-btn, .mobile-lang-btn').forEach(btn => btn.addEventListener('click', function() {
+                document.querySelectorAll('.lang-btn, .mobile-lang-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll(`.lang-btn[data-lang="${this.dataset.lang}"], .mobile-lang-btn[data-lang="${this.dataset.lang}"]`).forEach(b => b.classList.add('active'));
+                appState.language = this.dataset.lang;
+                updateUILanguage();
+            }));
+            document.querySelectorAll('.modal').forEach(m => m.addEventListener('click', e => { if (e.target === m) m.classList.remove('active'); }));
+            window.addEventListener('scroll', () => document.getElementById('header').classList.toggle('scrolled', window.scrollY > 100));
+        });
+    </script>
+</body>
+</html>
